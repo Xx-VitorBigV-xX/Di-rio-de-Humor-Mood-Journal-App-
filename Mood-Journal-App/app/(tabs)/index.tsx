@@ -1,13 +1,16 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet,View} from 'react-native';
 import  FloatingButton from '@/components/FloatingButton';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Contanier } from  '@/components/Contanier';
+import { CustomAlert } from '@/components/CustomAlert';
+import { useState } from 'react';
 
 export default function HomeScreen() {
+  const [showAlert, setShowAlert] = useState(false);
   return (
     <>
     <ParallaxScrollView
@@ -20,17 +23,40 @@ export default function HomeScreen() {
       }>
           <Contanier>
           </Contanier>
+
+
+
+        <CustomAlert
+          visible={showAlert}
+          onClose={() => setShowAlert(false)}
+          title="Alerta Personalizado"
+          message="Este é um alerta com estilo próprio!"/>
+      
+
+
+
       
     </ParallaxScrollView>
-      <FloatingButton onPress={()=>alert("Floating Button Pressed")} />
+
+          
+      <FloatingButton onPress={()=> setShowAlert(true)} />
+      
+
+
     </>
-    
+
   );
 }
 
+
 const styles = StyleSheet.create({
 
-
+  overlay: { //sobre posição
+    flex: 1,
+    backgroundColor: '#00000099',
+    justifyContent: 'center',
+    alignItems:'center',
+ },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
